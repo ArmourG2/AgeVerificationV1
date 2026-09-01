@@ -44,7 +44,7 @@ fun AgeVerificationScreen(onVerified: () -> Unit) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Please verify your age to access the Calculator.",
+            text = "Please verify your age to access the Application.",
             style = MaterialTheme.typography.bodyLarge
         )
 
@@ -55,7 +55,7 @@ fun AgeVerificationScreen(onVerified: () -> Unit) {
             onValueChange = { input ->
                 if (input.all { char -> char.isDigit() }) {
                     ageInput = input
-                    errorMessage = "" // Clear error when user types
+                    errorMessage = ""
                 }
             },
             label = { Text("Enter your age") },
@@ -64,7 +64,6 @@ fun AgeVerificationScreen(onVerified: () -> Unit) {
             modifier = Modifier.fillMaxWidth()
         )
 
-        // 3. CONDITIONAL UI: Only show this if errorMessage is not empty
         if (errorMessage.isNotEmpty()) {
             Text(
                 text = errorMessage,
@@ -75,7 +74,6 @@ fun AgeVerificationScreen(onVerified: () -> Unit) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // 4. ACTION: Button triggers logic
         Button(
             onClick = {
                 val age = ageInput.toIntOrNull()
@@ -83,7 +81,7 @@ fun AgeVerificationScreen(onVerified: () -> Unit) {
                     age == null -> errorMessage = "Please enter a valid number."
                     age < 18 -> errorMessage = "You must be 18 or older to use this app."
                     age > 120 -> errorMessage = "Please enter a realistic age."
-                    else -> onVerified() // 🚀 SUCCESS: Triggers the callback!
+                    else -> onVerified()
                 }
             },
             modifier = Modifier.fillMaxWidth().height(50.dp)

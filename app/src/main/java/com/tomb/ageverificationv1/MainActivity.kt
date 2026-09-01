@@ -18,19 +18,15 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AgeVerificationV1Theme {
-                // 1. STATE: Track if the user has passed verification
                 var isVerified by remember { mutableStateOf(false) }
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // 2. CONDITIONAL RENDERING
                     if (!isVerified) {
-                        // Show Age Verification first
                         AgeVerificationScreen(
                             onVerified = {
-                                // This runs when the user successfully verifies
                                 isVerified = true
                             }
                         )
